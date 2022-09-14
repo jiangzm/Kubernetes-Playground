@@ -1,2 +1,2 @@
-# Kubernetes-Playground
+# Kubernetes Playground
 Kubernetes Playground
