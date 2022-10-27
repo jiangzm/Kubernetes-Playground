@@ -1,132 +1,17 @@
-# selfsigned-issuer.issuer.yaml
-# 参考：https://cert-manager.io/docs/configuration/selfsigned/
-apiVersion: cert-manager.io/v1
-kind: Issuer
+apiVersion: v1
+kind: Secret
 metadata:
-  name: selfsigned-issuer
+  name: ca-tls
   namespace: cert-manager
-spec:
-  selfSigned: {}
+data:
+  tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURuekNDQW9lZ0F3SUJBZ0lVR3p5RjhBRC9XZHRYdy9yZ1pXeUVsakN2Q3pzd0RRWUpLb1pJaHZjTkFRRUwKQlFBd1hqRUxNQWtHQTFVRUJoTUNRMDR4Q3pBSkJnTlZCQWdNQWtkRU1Rc3dDUVlEVlFRSERBSlRXakVNTUFvRwpBMVVFQ2d3RFNscE5NUXN3Q1FZRFZRUUxEQUpKVkRFYU1CZ0dBMVVFQXd3UlNtbGhibWQ2YlNkeklGSnZiM1FnClEwRXdJQmNOTVRreE1qTXhNVFUxT1RVNVdoZ1BNakE1T1RFeU16RXhOVFU1TlRsYU1GNHhDekFKQmdOVkJBWVQKQWtOT01Rc3dDUVlEVlFRSURBSkhSREVMTUFrR0ExVUVCd3dDVTFveEREQUtCZ05WQkFvTUEwcGFUVEVMTUFrRwpBMVVFQ3d3Q1NWUXhHakFZQmdOVkJBTU1FVXBwWVc1bmVtMG5jeUJTYjI5MElFTkJNSUlCSWpBTkJna3Foa2lHCjl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUF3ZFZndDBVNDg2cUlYekd2NjNld056cGViaEhZdFZLb0h5WGYKSDZOTG8wQk9nU1FxdFgzNmo0b3I1dEE2ckRGajRia0JIQ3BkK1dIQWRBenF2UVBuNk5iVkI3ZU9OVVlUdkY2SQpRTGFBQ2tzZ1Y5MEJadXpXaEhXOEM1OHJUOEhaZDEyamZUTDMvU0owTXgxWllDbHRBU1ZQN1lUZ0hieW5RSGdzCndMMmNZWTZPYUNZS2Jsdmd3QlRXVU9UWDZBaEV5T2U0ZjJDWWpnQkNWeGdEKzRUcmRtQlBTMzdRNCtHQ0x1b2YKSFc5WHUrOG1QVjdiUndabWp6bkRQVUxrRDZDQjFSeE04Z1NkKytyWXBCbkUrdWRKOURCYUVwMldkY2xkMHlEUQpGd3B3c3FjM3IxRFBtQjM2YnFRSmlIcTh2Nm9IZFZ5SE9FemJYY21LellUL1ZFbU1tUUlEQVFBQm8xTXdVVEFkCkJnTlZIUTRFRmdRVXhad0x3MGxPVFhVU3ZpMVNvbGV0Ti8yaU5KZ3dId1lEVlIwakJCZ3dGb0FVeFp3THcwbE8KVFhVU3ZpMVNvbGV0Ti8yaU5KZ3dEd1lEVlIwVEFRSC9CQVV3QXdFQi96QU5CZ2txaGtpRzl3MEJBUXNGQUFPQwpBUUVBdFh0MVpKdjZPVHBrUlB4eVVnMjVNeXNQVDNkbmlBVjBvTkdYSUZuams2bnl6V0pQWnFGV0VBWC80SVNoCnp5ZStMRjQrRHNucmVFYWJnNVpvRDROamhPUjR2cDNwcEJEVUxxeVVPdlNaUmtUV1hmS3dqdUo2Y2EyaXhKaE4KSEFvZ3FIR0FBK2JJdDJxdTkyUlJTYXVpRWw2VndiTTlITWF6a0NIQm44QitGeTVvZ2Zoc0ZHK1NzbGJKT3RuRgpJdFBvSURZL1ArNjJlTktRSzVza1J6MjRRSVNOZ0pTTjJEUE4yNHpSRzV0NnFraGp3SzErUUZ6N2lSS3hqRGIvCmY0SmpxZ0hPaDVYTVQ4ZVBtSENmVHFjT0FEaEZkam1wMFBtUXZ4bCsvaTRBRnNNTC82WVNoZldtaEg3ZVVLTUwKOUpORk03RGwxKzN3QXFJbFRRZlArSHRnc2c9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+  tls.key: LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlFb2dJQkFBS0NBUUVBd2RWZ3QwVTQ4NnFJWHpHdjYzZXdOenBlYmhIWXRWS29IeVhmSDZOTG8wQk9nU1FxCnRYMzZqNG9yNXRBNnJERmo0YmtCSENwZCtXSEFkQXpxdlFQbjZOYlZCN2VPTlVZVHZGNklRTGFBQ2tzZ1Y5MEIKWnV6V2hIVzhDNThyVDhIWmQxMmpmVEwzL1NKME14MVpZQ2x0QVNWUDdZVGdIYnluUUhnc3dMMmNZWTZPYUNZSwpibHZnd0JUV1VPVFg2QWhFeU9lNGYyQ1lqZ0JDVnhnRCs0VHJkbUJQUzM3UTQrR0NMdW9mSFc5WHUrOG1QVjdiClJ3Wm1qem5EUFVMa0Q2Q0IxUnhNOGdTZCsrcllwQm5FK3VkSjlEQmFFcDJXZGNsZDB5RFFGd3B3c3FjM3IxRFAKbUIzNmJxUUppSHE4djZvSGRWeUhPRXpiWGNtS3pZVC9WRW1NbVFJREFRQUJBb0lCQUd5TGJTbTBYZncxMTBCWAp0c2dKc21oN0N6NWdTQmJpUHJ1U25hdzk2YkYxNVlCMEhHYWVNWjRJSmlXUEhnd25iR09QRW93UFBhalZrTXhzCkgxZlJ4Q0NqalpCUXZoWWZOQlljYWZpek9taUpRWWR5ZjhKL2huR083TXNsU3ovU3NsRWg0dGZObndubUxXUWkKWDFaMlhGQno4SnAxK25zc2xneUlQNmQvaHY4cHQxMUlKRy9YWUl1OTZwWTllRy9aMUtuS2JVVHRyb21FODNGSApHV3ZPVDcxK1AvQlZBLzQ5bmo1Y0FiNWhHbXZGRUpOSDJWd0FqdTBKM3l3TnVzUHdTT2k0aExoejJIbzFkQTdYCjNJQmp2cnNLUGhQZGk0YlhXZDdicEJ3djRWeWRoY0RPUHJCR2MzNEl5RWh6TnFHMWdYVzROZ2xCYVptbklwd2wKeGQ0cS9QRUNnWUVBOE4rTy9KWlljS0lxQ2lEcFRLMTc4OUdOVHBOOVo4azMwQ3JXN2xCREh1MHRubnExRi96WApxOTdiTEZMQm8rWWdKUElvcUNVcUZQOFBWWC9oS1V2TkxQaVF0V0prR2E3TVZ1M3VZalFNMTl6eWp6eEJrclZOClRRRWZJcVpMa3NUTENpTVFOMmRUb2pYUWM3aUR4RWlDRnc4aW9yblNqUUV6c3ZsbmVQdUVzeHNDZ1lFQXpnR1QKZjZDOXRWai9DY1FPditYMkxDcVBQUlpxMDAySXA5QU1jVnkrTUZlb2dxejdzVHdTZTc1SWV6NUl2Mit3ODhsdgozbGJqaGxlb3A4cExSdGxKNko5OFowR050RldCRVh6eGQwK1NLSEF2bFJ5SkRYV0ZJUHp2NGg3VFhTK3dQbW1LCjJGSEtXS01hV3k2T1F0aHk4ZmVjZitXL0hzUjhwVlRFc3U4MXhsc0NnWUFNSFRJendkdnd6amNQQzFpd1lvazUKV2ZDaFl3bUxqck1mNVFlcU5KOHJqd0ljVmsrRlJWSVRjc0hUR05aa1I4NldEUmUrWFNBZ3JqTTNPWmM1WEhhVgpMR3NhdERnVWtwWDBTVU1UN1VvNEVRU2g3NFhjdXdHSVBlWXk5K29WRjVDZWtlVGU1SE53VlFTR3pXRFRIbEpzCmxuWkhlTkQrQm5Gekx0ZmxYY0R1d1FLQmdGbTN1Z00xZ0NtQXJ1SVQ3dENJV0dQM3pSWXZzeXAvYytxUjR6bGoKeUxqSkZHeUU1Y0RVaHNBNXFOdHp6cjhBNTdIa29zSFVXWmJpaW1NNDZQdmNHaUlqZzB4ODhqZjluUTUrdWJMYQpocTd4M09jMTNFSnVVaUtCeGY5V3FYckdFQjIrWFdmRWh6bC9IelZpMnpZbGlqbnpPc2RBeWJHZXBTSmovcDVuCks2Wk5Bb0dBWkxQOFpuUlovcWJob3NsRkpoQWdYanRSNUxiUERkVGpuYkN2dzh1ekFnZi81VFlPL0dXQWVaemEKekZidk1iRWZjc2RTMDRFWkRmWEtacFJ2TWpHMkkyV2dWQXpPbVRkNE40cFlmOE54RHpsbWRnQjNLckZFVGNqSQpJdDAvL0ZvN0FTRWl2NHc1bHBQMkhaNUs5aitXMDR3MHMxd0pnL0hZRTZ5MjFOUXpmcDQ9Ci0tLS0tRU5EIFJTQSBQUklWQVRFIEtFWS0tLS0tCg==
 ---
-# ca-example-com.certificate.cert-manager.yaml
-# 参考：https://cert-manager.io/docs/usage/certificate/
-# api参考：https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1alpha3.Certificate
 apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: ca-example-com ###
-  namespace: cert-manager ### 修改为cert-manager的namespace，以让ClusterIssuer的CA Issuer可以使用此证书
-spec:
-  # Secret names are always required.
-  secretName: ca-example-com-tls ### Secret名字
-  duration: 2160h # 90d
-  renewBefore: 360h # 15d
-  subject:
-    organizations:
-    - Example Inc. ###
-  # The use of the common name field has been deprecated since 2000 and is
-  # discouraged from being used.
-  commonName: ca.example.com ###
-  isCA: true ### 修改为true，isCA将将此证书标记为对证书签名有效。这会将cert sign自动添加到usages列表中。
-  privateKey:
-    algorithm: RSA
-    encoding: PKCS1
-    size: 2048
-  #usages: ### 注释了usages，使用情况是证书要求的x509使用情况的集合。默认为digital signature，key encipherment如果未指定。
-  #  - server auth
-  #  - client auth
-  # At least one of a DNS Name, URI, or IP address is required.
-  dnsNames:
-  - ca.example.com ###
-  #uris: ### 注释了uris、ipAddresses
-  #- spiffe://cluster.local/ns/sandbox/sa/example
-  #ipAddresses:
-  #- 192.168.0.5
-  # Issuer references are always required.
-  issuerRef:
-    name: selfsigned-issuer ### 指定为自签名发行人
-    # We can reference ClusterIssuers by changing the kind here.
-    # The default value is Issuer (i.e. a locally namespaced Issuer)
-    kind: Issuer
-    # This is optional since cert-manager will default to this value however
-    # if you are using an external issuer, change this to that issuer group.
-    group: cert-manager.io
----
-# ca-issuer.clusterissuer.yaml
-# 参考：https://cert-manager.io/docs/configuration/ca/
-apiVersion: cert-manager.io/v1
-kind: ClusterIssuer ### ClusterIssuer
+kind: ClusterIssuer
 metadata:
   name: ca-issuer
-  namespace: cert-manager ### ClusterIssuer下namespace无效
+  namespace: cert-manager
 spec:
   ca:
-    secretName: ca-example-com-tls ###
----
-# site-example-com.certificate.example-com.yaml
-# 参考：https://cert-manager.io/docs/usage/certificate/
-# api参考：https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1alpha3.Certificate
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: site-example-com ###
-  namespace: example-com ### 站点所在名字空间
-spec:
-  # Secret names are always required.
-  secretName: site-example-com-tls ### Secret名字
-  duration: 2160h # 90d
-  renewBefore: 360h # 15d
-  subject:
-    organizations:
-    - Example Inc. ###
-  # The use of the common name field has been deprecated since 2000 and is
-  # discouraged from being used.
-  commonName: site.example.com ###
-  isCA: false
-  privateKey:
-    algorithm: RSA
-    encoding: PKCS1
-    size: 2048
-  #usages: ### 注释了usages，使用情况是证书要求的x509使用情况的集合。默认为digital signature，key encipherment如果未指定。
-  #  - server auth
-  #  - client auth
-  # At least one of a DNS Name, URI, or IP address is required.
-  dnsNames:
-  - site.example.com ###
-  #uris: ### 注释了uris、ipAddresses
-  #- spiffe://cluster.local/ns/sandbox/sa/example
-  #ipAddresses:
-  #- 192.168.0.5
-  # Issuer references are always required.
-  issuerRef:
-    name: ca-issuer ### 使用CA Issuer
-    # We can reference ClusterIssuers by changing the kind here.
-    # The default value is Issuer (i.e. a locally namespaced Issuer)
-    kind: ClusterIssuer ### CA Issuer是ClusterIssuer
-    # This is optional since cert-manager will default to this value however
-    # if you are using an external issuer, change this to that issuer group.
-    group: cert-manager.io
----
-# site-example-com.ingress.example-com.yaml
-# 参考：https://kubernetes.io/zh/docs/concepts/services-networking/ingress/#tls
-kind: Ingress
-apiVersion: extensions/v1beta1
-metadata:
-  name: site-example-com
-  namespace: example-com
-  annotations:
-    kubernetes.io/ingress.class: nginx
-spec:
-  tls:
-    - hosts:
-        - site.example.com
-      secretName: site-example-com-tls
-  rules:
-    - host: site.example.com
-      http:
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-            backend:
-              serviceName: nginx
-              servicePort: 80
+    secretName: ca-tls

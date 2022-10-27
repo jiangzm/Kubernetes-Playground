@@ -1,33 +1,38 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    app.kubernetes.io/instance: kube-devops
+    app.kubernetes.io/name: kube-devops
+  name: kube-devops
+---
 kind: Deployment
 apiVersion: apps/v1
 metadata:
   labels:
-    k8s-app: echo-server
-  name: echo-server
+    k8s-app: echoserver
+  name: echoserver
   namespace: kube-devops
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: echo-server
+      app: echoserver
   template:
     metadata:
       labels:
-        app: echo-server
+        app: echoserver
     spec:
       containers:
-      - image: registry.cn-shenzhen.aliyuncs.com/k8shub/echoserver:1.10
+      - image: echoserver:latest
         imagePullPolicy: IfNotPresent
-        name: echo-server
+        name: echoserver
         ports:
         - containerPort: 8080
         resources:
           requests:
             cpu: 100m
             memory: 200Mi
-          limits:
-            cpu: 200m
-            memory: 400Mi
         env:
           - name: NODE_NAME
             valueFrom:
@@ -49,10 +54,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: echo-server
+  name: echoserver
   namespace: kube-devops
   labels:
-    k8s-app: echo-server
+    k8s-app: echoserver
 spec:
   ports:
   - name: http
@@ -60,23 +65,29 @@ spec:
     targetPort: 8080
     protocol: TCP
   selector:
-    app: echo-server
+    app: echoserver
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: echo-server
+  name: echoserver
   namespace: kube-devops
   labels:
-    k8s-app: echo-server
+    k8s-app: echoserver
+  annotations:
+    # kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: ca-issuer
+    nginx.ingress.kubernetes.io/ssl-redirect: 'false'
+    nginx.ingress.kubernetes.io/server-alias: www.app.test
 spec:
   ingressClassName: nginx
   tls:
   - hosts:
-    - echo.test.app
-    secretName: apps-cert
+    - echo.app.test              # TLS 域名
+    - www.app.test
+    secretName: echoserver-tls   # 用于存储证书的 Secret 对象名字
   rules:
-  - host: echo.test.app
+  - host: echo.app.test
     http:
       paths:
       - path: /
