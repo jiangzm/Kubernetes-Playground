@@ -78,13 +78,13 @@ metadata:
     # kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: ca-issuer
     nginx.ingress.kubernetes.io/ssl-redirect: 'false'
-    nginx.ingress.kubernetes.io/server-alias: www.app.test
+    nginx.ingress.kubernetes.io/server-alias: echo.app.local
 spec:
   ingressClassName: nginx
   tls:
   - hosts:
     - echo.app.test              # TLS 域名
-    - www.app.test
+    - echo.app.local
     secretName: echoserver-tls   # 用于存储证书的 Secret 对象名字
   rules:
   - host: echo.app.test
